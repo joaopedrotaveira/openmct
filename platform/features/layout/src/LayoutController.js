@@ -50,9 +50,11 @@ define(
          * @constructor
          * @param {Scope} $scope the controller's Angular scope
          */
-        function LayoutController($scope) {
+        function LayoutController($scope, openmct) {
             var self = this,
                 callbackCount = 0;
+    
+            this.openmct = openmct;
 
             // Update grid size when it changed
             function updateGridSize(layoutGrid) {
@@ -374,13 +376,15 @@ define(
          * @param event the mouse event
          * @param {string} id the object id
          */
-        LayoutController.prototype.select = function (event, id) {
+        LayoutController.prototype.select = function (event, id, domainObject) {
             if (event) {
                 event.stopPropagation();
                 if (this.selection) {
                     event.preventDefault();
                 }
             }
+
+            this.openmct.selection.select({item: domainObject.useCapability('adapter'), oldItem: domainObject});
 
             this.selectedId = id;
 

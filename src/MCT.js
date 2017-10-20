@@ -122,6 +122,16 @@ define([
          */
         this.inspectors = new ViewRegistry();
 
+         /**
+         * Registry for views which should appear in the Inspector area.
+         * These views will be chosen based on selection state.
+         *
+         * @type {module:openmct.InspectorViewRegistry}
+         * @memberof module:openmct.MCT#
+         * @name inspectorViews
+         */
+        // this.inspectorViews = new InspectorViewRegistry();
+
         /**
          * Registry for views which should appear in Edit Properties
          * dialogs, and similar user interface elements used for
@@ -196,7 +206,11 @@ define([
 
         this.Dialog = api.Dialog;
 
-        this.on('navigation', this.selection.clear.bind(this.selection));
+        this.on('navigation', function(domainObject) {
+            console.log("nav start", domainObject);            
+            this.selection.select({item: domainObject.useCapability('adapter'), oldItem: domainObject});
+            console.log("nav stop");
+        }.bind(this));
     }
 
     MCT.prototype = Object.create(EventEmitter.prototype);
