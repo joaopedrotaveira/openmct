@@ -116,8 +116,12 @@ define(
 
                     //Is this callback for the most recent composition
                     // request? If not, discard it. Prevents race condition
+                    var domainObject;
                     if (thisCount === callbackCount) {
                         ids = composition.map(function (object) {
+                                if (self.droppedIdToSelectAfterRefresh && self.droppedIdToSelectAfterRefresh === object.getId()) {
+                                    domainObject = object;
+                                }
                                 return object.getId();
                             }) || [];
 
@@ -127,7 +131,7 @@ define(
 
                         // If there is a newly-dropped object, select it.
                         if (self.droppedIdToSelectAfterRefresh) {
-                            self.select(null, self.droppedIdToSelectAfterRefresh);
+                            self.select(null, self.droppedIdToSelectAfterRefresh, domainObject);
                             delete self.droppedIdToSelectAfterRefresh;
                         }
 

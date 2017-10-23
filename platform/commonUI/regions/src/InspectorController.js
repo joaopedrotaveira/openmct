@@ -36,10 +36,10 @@ define(
             function setSelection(selection) {
 
                 if (selection[0]) {
-                    $scope.inspectorKey = selection[0].oldItem.getCapability("type").typeDef.inspector
+                    $scope.inspectorKey = selection[0].oldItem.getCapability("type").typeDef.inspector;
                 }
 
-                $scope.selection = selection;            
+                $scope.selection = selection;
             }
 
             openmct.selection.on("change", setSelection);
