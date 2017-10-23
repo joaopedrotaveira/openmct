@@ -108,7 +108,7 @@ define(
                     return domainObject;
                 });
             } else {
-                return new Promise(function () {});
+                return Promise.resolve(domainObject);
             }
         };
 
