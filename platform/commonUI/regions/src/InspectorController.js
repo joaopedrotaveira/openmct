@@ -30,13 +30,19 @@ define(
          *
          * @constructor
          */
-        function InspectorController($scope, policyService, openmct) {
+        function InspectorController($scope, policyService, openmct, $document) {
             window.inspectorScope = $scope;
 
             function setSelection(selection) {
 
                 if (selection[0]) {
-                    $scope.inspectorKey = selection[0].oldItem.getCapability("type").typeDef.inspector;
+                    var view = openmct.inspectorViews.get(selection);
+                    if (view) {
+                        var container = $document[0].querySelectorAll('.custom-view')[0];
+                        view.show(container);
+                    } else {
+                        $scope.inspectorKey = selection[0].oldItem.getCapability("type").typeDef.inspector;    
+                    }
                 }
 
                 $scope.selection = selection;

@@ -39,7 +39,8 @@ define([
                     "depends": [
                         "$scope",
                         "policyService",
-                        "openmct"
+                        "openmct",
+                        "$document"
                     ]
                 }
             ],
