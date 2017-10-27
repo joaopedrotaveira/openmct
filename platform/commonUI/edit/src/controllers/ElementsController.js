@@ -78,13 +78,14 @@ define(
                 return;
             }
 
-            // var composition = selection.item.composition;
-            // this.scope.composition = composition;
-            // this.scope.composition = selection.oldItem.getCapability('composition');
-
-            selection.oldItem.useCapability('composition').then(function (composition) {
+            var composition = selection.oldItem.useCapability('composition');
+            if (composition) {
+                composition.then(function (composition) {
                     this.scope.composition = composition;                    
-            }.bind(this));
+                }.bind(this));    
+            } else {
+                this.scope.composition = [];
+            }
         };
 
         return ElementsController;

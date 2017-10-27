@@ -68,23 +68,23 @@
             openmct.time.clock('local', {start: -THIRTY_MINUTES, end: 0});
             openmct.time.timeSystem('utc');
 
-            openmct.inspectorViews.addProvider({
-                key: "my-key",
-                name: 'my view',
-                canView: function (selection) {
-                    return selection[0].item.type === 'timer';
-                },
-                view: function (selection) {
-                    return {
-                        show: function (container) {
-                            container.innerHTML = '<div> Congratulations, this is a view of: ' + selection[0].item.name + '</div>';
-                        },
-                        destroy: function (container) {
+            // openmct.inspectorViews.addProvider({
+            //     key: "my-key",
+            //     name: 'my view',
+            //     canView: function (selection) {
+            //         return selection[0].item.type === 'timer';
+            //     },
+            //     view: function (selection) {
+            //         return {
+            //             show: function (container) {
+            //                 container.innerHTML = '<div> Congratulations, this is a view of: ' + selection[0].item.name + '</div>';
+            //             },
+            //             destroy: function (container) {
 
-                        }
-                    }
-                }
-            });
+            //             }
+            //         }
+            //     }
+            // });
 
             openmct.start();
             window.openmct = openmct;
