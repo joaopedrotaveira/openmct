@@ -53,7 +53,7 @@ define(
         function LayoutController($scope, openmct) {
             var self = this,
                 callbackCount = 0;
-    
+
             this.openmct = openmct;
 
             // Update grid size when it changed
@@ -424,6 +424,8 @@ define(
             if (this.dragInProgress) {
                 return;
             }
+
+            this.openmct.selection.select({item: this.$scope.domainObject.useCapability('adapter'), oldItem: this.$scope.domainObject});
 
             if (this.selection) {
                 this.selection.deselect();
